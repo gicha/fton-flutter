@@ -2,9 +2,9 @@ import 'package:darttonconnect/models/wallet_app.dart';
 import 'package:darttonconnect/ton_connect.dart';
 import 'package:flutter/material.dart';
 import 'package:fton/model/ton_connect/ton_connect_storage.dart';
-import 'package:fton/ui/pages/ton_connect/ton_connect_view.dart';
+import 'package:fton/ui/pages/ton_connect/ton_connect_page.dart';
 
-mixin TonConnectViewWm on State<TonConnectView> {
+mixin TonConnectWm on State<TonConnectPage> {
   final TonConnect connector = TonConnect(
     'https://fton.vercel.app/tonconnect-manifest.json',
     customStorage: TonConnectStorage(),

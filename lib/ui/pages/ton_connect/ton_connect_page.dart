@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fton/ui/pages/ton_connect/ton_connect_wm.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
-class TonConnectView extends StatefulWidget {
-  const TonConnectView({super.key});
+class TonConnectPage extends StatefulWidget {
+  const TonConnectPage({super.key});
 
   @override
-  State<TonConnectView> createState() => _TonConnectViewState();
+  State<TonConnectPage> createState() => _TonConnectPageState();
 }
 
-class _TonConnectViewState extends State<TonConnectView> with TonConnectViewWm {
+class _TonConnectPageState extends State<TonConnectPage> with TonConnectWm {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(

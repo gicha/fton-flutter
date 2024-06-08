@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fton/extensions/telegram.dart';
-import 'package:fton/ui/pages/start/start_view.dart';
+import 'package:fton/router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:telegram_web_app/telegram_web_app.dart';
 
 class App extends StatefulWidget {
@@ -12,6 +13,14 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  late GoRouter router;
+
+  @override
+  void initState() {
+    router = AppRouter.getRouter('/start');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final app = context.app;
@@ -25,17 +34,18 @@ class _AppState extends State<App> {
       locale = const Locale('en');
     }
     if (isAndroid) {
-      return MaterialApp(
+      return MaterialApp.router(
         debugShowCheckedModeBanner: false,
+        routerConfig: router,
         theme: theme,
         title: 'FTON',
         themeMode: isLight ? ThemeMode.light : ThemeMode.dark,
         locale: locale,
-        home: const StartViewPage(),
       );
     } else {
-      return CupertinoApp(
+      return CupertinoApp.router(
         debugShowCheckedModeBanner: false,
+        routerConfig: router,
         theme: theme == null
             ? null
             : MaterialBasedCupertinoThemeData(materialTheme: theme),
@@ -46,7 +56,6 @@ class _AppState extends State<App> {
           DefaultCupertinoLocalizations.delegate,
           DefaultWidgetsLocalizations.delegate,
         ],
-        home: const StartViewPage(),
       );
     }
   }

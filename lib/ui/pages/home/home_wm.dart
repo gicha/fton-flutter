@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fton/ui/pages/home/home_view.dart';
+import 'package:fton/ui/pages/home/home_page.dart';
 
-mixin HomeViewPageWm on State<HomeViewPage> {}
+mixin HomeWm on State<HomePage> {}

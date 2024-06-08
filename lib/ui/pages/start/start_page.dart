@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fton/ui/pages/start/start_wm.dart';
 
-class StartViewPage extends StatefulWidget {
-  const StartViewPage({super.key});
+class StartPage extends StatefulWidget {
+  const StartPage({super.key});
 
   @override
-  State<StartViewPage> createState() => _StartViewPageState();
+  State<StartPage> createState() => _StartPageState();
 }
 
-class _StartViewPageState extends State<StartViewPage> with StartViewPageWm {
+class _StartPageState extends State<StartPage> with StartPageWm {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
