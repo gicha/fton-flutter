@@ -1,0 +1,87 @@
+version: "3"
+
+tasks:
+  flutter:get:
+    desc: Get flutter dependencies
+    summary: |
+      Get flutter dependencies
+    cmds:
+      - flutter pub get
+
+  dart:fix:
+    desc: Fix dart files
+    summary: |
+      Fix dart files
+    cmds:
+      - dart fix --apply
+
+  dart:format:
+    desc: Format dart files
+    summary: |
+      Format dart files
+    cmds:
+      - dart format --set-exit-if-changed .
+
+  dart:gen:
+    desc: Generate dart files
+    summary: |
+      Run codegen
+    cmds:
+      - flutter packages pub get
+      - dart run build_runner build
+
+  dart:gen:force:
+    desc: Generate dart files
+    summary: |
+      Run codegen with --delete-conflicting-outputs
+    cmds:
+      - dart run build_runner build --delete-conflicting-outputs
+
+  dart:gen:watch:
+    desc: Generate dart files
+    summary: |
+      Watch codegen
+    cmds:
+      - dart run build_runner watch --delete-conflicting-outputs
+
+  splash:gen:
+    desc: Generate native splash
+    summary: |
+      Generate native splash screen with flutter_native_splash
+    cmds:
+      - dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+
+  l10n:gen:
+    desc: Generate localizations
+    summary: |
+      Generate localizations without VSCode or Android Studio plugins
+    cmds:
+      - dart run intl_utils:generate
+
+  build:apk:
+    desc: Build apk for production
+    summary: |
+      Build apk for production
+    cmds:
+      - flutter build apk --release
+
+  build:aab:
+    desc: Build appbundle for production
+    summary: |
+      Build bundle for production markets
+    cmds:
+      - flutter build appbundle --release
+
+  build:ios:
+    desc: Build ios for production
+    summary: |
+      Build ios for production
+    cmds:
+      - flutter build ios --release
+
+  deploy:aab:
+    desc: Deploy appbundle to Firebase App Distribution
+    summary: |
+      Deploy appbundle to Firebase App Distribution
+    cmds:
+      - sh ./scripts/app_distribution.sh
