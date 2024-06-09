@@ -10,28 +10,74 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> with StartPageWm {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('FTON'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
+  Widget build(BuildContext context) => Stack(
+        children: [
+          IgnorePointer(
+            ignoring: isLoading,
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('FTON'),
               ),
-              Text(
-                '$counter',
-                style: Theme.of(context).textTheme.headlineMedium,
+              body: ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: publicKeyController,
+                          onChanged: onPublicKeyChanged,
+                          enabled: !contractInited,
+                          decoration: const InputDecoration(
+                            labelText: 'Public key',
+                          ),
+                        ),
+                      ),
+                      if (contractInited)
+                        ElevatedButton(
+                          onPressed: disconnect,
+                          child: const Text('Change key'),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  if (!contractInited)
+                    ElevatedButton(
+                      onPressed: publicKeyValid ? initContract : null,
+                      child: const Text('Init contract'),
+                    )
+                  else ...[
+                    TextField(
+                      controller: healthDataController,
+                      onChanged: onHealthDataChanged,
+                      decoration: const InputDecoration(
+                        labelText: 'Health data',
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: newDataValid ? addHealthData : null,
+                      child: const Text('Add health data'),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: loadHealthRecords,
+                      child: const Text('Load health records'),
+                    ),
+                    const SizedBox(height: 16),
+                    for (final record in healthDataRecords.reversed)
+                      ListTile(title: Text(record)),
+                  ],
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
+          if (isLoading)
+            const Positioned.fill(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+        ],
       );
 }
