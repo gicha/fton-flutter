@@ -24,10 +24,10 @@ class _StartPageState extends State<StartPage> with StartPageWm {
                   Row(
                     children: [
                       Expanded(
-                        child: TextField(
-                          controller: publicKeyController,
-                          onChanged: onPublicKeyChanged,
+                        child: TextFormField(
+                          controller: mnemonicController,
                           enabled: !contractInited,
+                          maxLines: null,
                           decoration: const InputDecoration(
                             labelText: 'Public key',
                           ),
@@ -43,7 +43,7 @@ class _StartPageState extends State<StartPage> with StartPageWm {
                   const SizedBox(height: 16),
                   if (!contractInited)
                     ElevatedButton(
-                      onPressed: publicKeyValid ? initContract : null,
+                      onPressed: initContract,
                       child: const Text('Init contract'),
                     )
                   else ...[

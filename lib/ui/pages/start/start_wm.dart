@@ -13,10 +13,9 @@ mixin StartPageWm on State<StartPage> {
 
   bool isLoading = false;
 
-  final publicKeyController = TextEditingController(text: 'testPublicKey');
+  final mnemonicController = TextEditingController(text: 'testPublicKey');
   final healthDataController = TextEditingController();
   bool contractInited = false;
-  bool publicKeyValid = false;
   bool newDataValid = false;
   final healthDataRecords = <String>[];
 
@@ -30,7 +29,7 @@ mixin StartPageWm on State<StartPage> {
     if (contractInited) return;
     setState(() => isLoading = true);
     try {
-      final publicKey = publicKeyController.text.trim();
+      final publicKey = mnemonicController.text.trim();
       await _contractController.initContract(publicKey);
       contractInited = true;
       unawaited(loadHealthRecords());
@@ -49,12 +48,6 @@ mixin StartPageWm on State<StartPage> {
     setState(() => contractInited = false);
   }
 
-  void onPublicKeyChanged(String? value) {
-    setState(() {
-      publicKeyValid = value?.trim().isNotEmpty ?? false;
-    });
-  }
-
   void onHealthDataChanged(String? value) {
     setState(() {
       newDataValid = value?.trim().isNotEmpty ?? false;
@@ -64,7 +57,8 @@ mixin StartPageWm on State<StartPage> {
   Future<void> addHealthData() async {
     setState(() => isLoading = true);
     try {
-      final encryptedData = healthDataController.text.trim();
+      final data = healthDataController.text.trim();
+      final encryptedData = data; // add encryption
       await _contractController.addHealthData(encryptedData);
       healthDataRecords.add(encryptedData);
       await loadHealthRecords();
@@ -86,10 +80,9 @@ mixin StartPageWm on State<StartPage> {
       healthDataRecords.clear();
       final recordsCount = await _contractController.getRecordsCount();
       for (int i = 1; i <= recordsCount; i++) {
-        final record = await _contractController.getHealthDataValue(i);
-        setState(() {
-          healthDataRecords.add(record);
-        });
+        final encryptedData = await _contractController.getHealthDataValue(i);
+        final data = encryptedData; // add decryption
+        setState(() => healthDataRecords.add(data));
       }
     } catch (e) {
       logger.e('Failed to load health records: $e');

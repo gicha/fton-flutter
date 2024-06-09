@@ -15,8 +15,6 @@ dependencies:
   darttonconnect: ^1.0.3
   pretty_qr_code: ^3.3.0
   flutter_secure_storage: ^9.2.2
-  ton:
-    path: packages/ton
   go_router:
     git:
       url: https://github.com/tolo/flutter_packages.git
@@ -24,6 +22,8 @@ dependencies:
       path: packages/go_router
   tonutils: ^0.5.6
   logger: ^1.4.0
+  bip39: ^1.0.6
+  fast_rsa: ^3.6.2
 
 dev_dependencies:
   flutter_test:

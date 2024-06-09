@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  bip39:
+    dependency: "direct main"
+    description:
+      name: bip39
+      sha256: de1ee27ebe7d96b84bb3a04a4132a0a3007dcdd5ad27dd14aa87a29d97c45edc
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   boolean_selector:
     dependency: transitive
     description:
@@ -89,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  fast_rsa:
+    dependency: "direct main"
+    description:
+      name: fast_rsa
+      sha256: d4e1191e6fcf212b22b293b1c1ab7838fc9162df23807ae726f679a5e261be9c
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.2"
   ffi:
     dependency: transitive
     description:
@@ -105,19 +121,19 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  flat_buffers:
+    dependency: transitive
+    description:
+      name: flat_buffers
+      sha256: "23e2ced0d8e8ecdffbd9f267f49a668c74438393b9acaeac1c724123e3764263"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_i18n:
-    dependency: transitive
-    description:
-      name: flutter_i18n
-      sha256: c823a9c9e32d2166d0ce8fa60b63459648a55f29a17c0d5dbf66fe4c9e05f1c2
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.35.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -126,11 +142,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-  flutter_localizations:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -382,14 +393,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
-  petitparser:
-    dependency: transitive
-    description:
-      name: petitparser
-      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.2"
   pinenacl:
     dependency: transitive
     description:
@@ -446,14 +449,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  qr_flutter:
-    dependency: transitive
-    description:
-      name: qr_flutter
-      sha256: "5095f0fc6e3f71d08adef8feccc8cea4f12eec18a2e31c2e8d82cb6019f4b097"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
   shared_preferences:
     dependency: transitive
     description:
@@ -571,21 +566,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
-  toml:
-    dependency: transitive
-    description:
-      name: toml
-      sha256: "9968de24e45b632bf1a654fe1ac7b6fe5261c349243df83fd262397799c45a2d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.0"
-  ton:
-    dependency: "direct main"
-    description:
-      path: "packages/ton"
-      relative: true
-    source: path
-    version: "0.0.4"
   tonutils:
     dependency: "direct main"
     description:
@@ -658,30 +638,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  xml:
-    dependency: transitive
-    description:
-      name: xml
-      sha256: b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.5.0"
-  xml2json:
-    dependency: transitive
-    description:
-      name: xml2json
-      sha256: "52b7c8d350fdce09545b058982c26689ee89f1eb188cc9910d585665bfe27bc0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.2.3"
-  yaml:
-    dependency: transitive
-    description:
-      name: yaml
-      sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.2"
 sdks:
   dart: ">=3.4.3 <4.0.0"
   flutter: ">=3.22.0"
