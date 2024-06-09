@@ -279,7 +279,7 @@ packages:
     source: hosted
     version: "4.0.0"
   logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logger
       sha256: "7ad7215c15420a102ec687bb320a7312afd449bac63bfb1c60d9787c27b9767f"
@@ -587,7 +587,7 @@ packages:
     source: path
     version: "0.0.4"
   tonutils:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: tonutils
       sha256: "0fd821a8955262c4e6ceecb0d4125d36e804eaf6291b6d38501786bbe854cbe4"

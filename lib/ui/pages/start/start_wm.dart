@@ -5,6 +5,8 @@ mixin StartPageWm on State<StartPage> {
   int counter = 0;
 
   void incrementCounter() {
+    // ContractController().createAccount('test434930', 'test230203');
+    // ContractController().test();
     setState(() {
       counter++;
     });
