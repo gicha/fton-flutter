@@ -1,28 +1,33 @@
 import 'dart:async';
 
 import 'package:darttonconnect/logger.dart';
+import 'package:darttonconnect/parsers/connect_event.dart';
 import 'package:flutter/material.dart';
 import 'package:fton/model/contract/contract_controller.dart';
 import 'package:fton/model/contract/contract_controller_impl.dart';
 import 'package:fton/ui/pages/start/start_page.dart';
 
 mixin StartPageWm on State<StartPage> {
-  final ContractController _contractController =
-      ContractControllerImpl('test214003oee');
+  late ContractController _contractController;
   late final _messenger = ScaffoldMessenger.of(context);
 
   bool isLoading = false;
 
+  WalletInfo? wallet;
   final mnemonicController = TextEditingController(text: 'testPublicKey');
   final healthDataController = TextEditingController();
   bool contractInited = false;
   bool newDataValid = false;
   final healthDataRecords = <String>[];
 
-  @override
-  void initState() {
-    initContract().then((_) => loadHealthRecords());
-    super.initState();
+  void onWalletConnected(WalletInfo wallet) {
+    setState(() => this.wallet = wallet);
+    _contractController = ContractControllerImpl(wallet.account!.address);
+    initContract();
+  }
+
+  void onWalletDisconnected() {
+    setState(() => wallet = null);
   }
 
   Future<void> initContract() async {
