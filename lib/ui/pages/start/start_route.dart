@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 class StartRoute extends GoRoute {
   StartRoute()
       : super(
-          path: '/start',
+          path: '/',
           name: 'start',
           builder: (context, state) => const StartPage(),
           routes: [],

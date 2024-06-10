@@ -17,7 +17,7 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
-    router = AppRouter.getRouter('/start');
+    router = AppRouter.getRouter();
     super.initState();
   }
 

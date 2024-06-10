@@ -24,6 +24,7 @@ dependencies:
   logger: ^1.4.0
   bip39: ^1.0.6
   fast_rsa: ^3.6.2
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

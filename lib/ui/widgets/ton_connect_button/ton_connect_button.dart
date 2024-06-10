@@ -19,17 +19,12 @@ class TonConnectButton extends StatefulWidget {
 class _TonConnectButtonState extends State<TonConnectButton>
     with TonConnectButtonWm {
   @override
-  Widget build(BuildContext context) => ElevatedButton(
-        onPressed: universalLink == null ? null : onButtonTap,
-        child: Text(
-          universalLink == null
-              ? 'Connecting'
-              : connected
-                  ? 'Disconnect'
-                  : 'Connect',
-          style: TextStyle(
-            color: connected ? Colors.red : Colors.green,
-          ),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final buttonEnabled = status == TonConnectStatus.connected ||
+        status == TonConnectStatus.readyToConnect;
+    return ElevatedButton(
+      onPressed: buttonEnabled ? onButtonTap : null,
+      child: Text(status.title),
+    );
+  }
 }
