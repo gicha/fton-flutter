@@ -43,6 +43,8 @@ mixin TonConnectButtonWm on State<TonConnectButton> {
   }
 
   void onWalletStatusChange(_) {
+    print('onWalletStatusChange');
+    print(_);
     setState(() {});
     final wallet = connector.wallet;
     if (wallet != null) {
@@ -72,7 +74,7 @@ mixin TonConnectButtonWm on State<TonConnectButton> {
     try {
       final response = await http.get(
         Uri.parse(
-          'https://raw.githubusercontent.com/ton-blockchain/wallets-list/main/wallets.json',
+          'https://raw.githubusercontent.com/ton-blockchain/wallets-list/main/wallets-v2.json',
         ),
       );
       if (response.statusCode == 200) {
@@ -178,11 +180,32 @@ mixin TonConnectButtonWm on State<TonConnectButton> {
   }
 
   Future<void> connect() async {
+    final app = TelegramWebApp.instance;
+    await app.expand();
     final selectedWallet = await selectWallet();
     if (selectedWallet == null) return;
     final url = await connector.connect(selectedWallet);
-    if (TelegramWebApp.instance.isSupported) {
-      await TelegramWebApp.instance.openLink(url, tryInstantView: false);
+    String walletUrl = url;
+    bool isTgLink = false;
+    if (url.contains('https://t.me/wallet?attach=wallet?')) {
+      isTgLink = true;
+      walletUrl = url
+          .replaceAll(
+            'https://t.me/wallet?attach=wallet?v=2&id=',
+            'https://t.me/wallet/start?startapp=tonconnect-v__2-id__',
+          )
+          .replaceAll(
+            '&r=%7B%22manifestUrl%22%3A%22https%3A%2F%2Ffton.vercel.app%2Ftonconnect-manifest.json%22%2C%22items%22%3A%5B%7B%22name%22%3A%22ton_addr%22%7D%5D%7D',
+            '-r__--7B--22manifestUrl--22--3A--22https--3A--2F--2Ffton--2Evercel--2Eapp--2Ftonconnect--2Dmanifest--2Ejson--22--2C--22items--22--3A--5B--7B--22name--22--3A--22ton--5Faddr--22--7D--5D--7D-ret__none',
+          );
+    }
+    print(walletUrl);
+    if (app.isSupported) {
+      if (isTgLink) {
+        await app.openTelegramLink(walletUrl);
+      } else {
+        await app.openLink(walletUrl, tryInstantView: false);
+      }
     } else {
       await showAdaptiveDialog(
         // ignore: use_build_context_synchronously
@@ -192,7 +215,7 @@ mixin TonConnectButtonWm on State<TonConnectButton> {
           content: SizedBox.square(
             dimension: MediaQuery.sizeOf(context).width * .7,
             child: QrImageView(
-              data: url,
+              data: walletUrl,
               size: MediaQuery.sizeOf(context).width * .7,
               backgroundColor: Colors.white,
             ),
