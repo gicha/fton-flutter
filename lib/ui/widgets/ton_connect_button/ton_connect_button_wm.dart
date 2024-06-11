@@ -6,6 +6,7 @@ import 'package:darttonconnect/models/wallet_app.dart';
 import 'package:darttonconnect/ton_connect.dart';
 import 'package:flutter/material.dart';
 import 'package:fton/model/ton_connect/ton_connect_storage.dart';
+import 'package:fton/ui/widgets/ton_connect_button/ton_connect_bts.dart';
 import 'package:fton/ui/widgets/ton_connect_button/ton_connect_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
@@ -142,40 +143,9 @@ mixin TonConnectButtonWm on State<TonConnectButton> {
 
   Future<WalletApp?> selectWallet() async {
     final wallets = this.wallets!;
-    return showDialog<WalletApp>(
-      // ignore: use_build_context_synchronously
-      context: context,
-      builder: (context) => Center(
-        child: Dialog(
-          child: Material(
-            color: Colors.transparent,
-            child: ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(height: 8),
-              padding: const EdgeInsets.all(16),
-              shrinkWrap: true,
-              itemCount: wallets.length,
-              itemBuilder: (context, index) {
-                final wallet = wallets[index];
-                return ListTile(
-                  leading: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: NetworkImage(wallet.image),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  title: Text(wallet.name),
-                  onTap: () => Navigator.of(context).pop(wallet),
-                );
-              },
-            ),
-          ),
-        ),
-      ),
+    return TonConnectBottomSheet.show(
+      context,
+      wallets: wallets,
     );
   }
 
